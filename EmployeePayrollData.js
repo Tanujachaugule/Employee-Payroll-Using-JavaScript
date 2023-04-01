@@ -18,7 +18,8 @@ class EmployeePayrollData{
         let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}');
         if (nameRegex.test(name)) {
           this.name = name;
-        } else throw 'name is incorrect';
+        } else 
+        throw 'name is incorrect';
       }
     
       getId() {
@@ -37,17 +38,24 @@ class EmployeePayrollData{
         let genderRegex = RegExp('[M|F]');
         if (genderRegex.test(gender)) {
           this.gender = gender;
-        } else throw 'gender should be M or F';
+        } else 
+        throw 'gender should be M or F';
       }
       getSalary(){ return this.salary; }
-      setSalary(salary){
-          this.salary = salary;
-      }
-      getStartDate(){ return this.startDate; }
-      setStartDate(startDate){
-          this.startDate = startDate;
-      }
-
+    setSalary(salary){
+        let salaryRegex = RegExp('^[1-9][0-9]*$');
+        if (salaryRegex.test(salary))
+            this.salary = salary;
+        else
+            throw "SALARY is Incorrect";
+    }
+    getStartDate(){ return this.startDate; }
+    setStartDate(startDate){
+        if(startDate <= new Date())
+            this.startDate = startDate;
+        else
+            throw "START DATE is Incorrect";
+    }
       toString(){
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const employeeDate = this.startDate == undefined ? "undefined" : this.startDate.toLocaleDateString("en-us", options);
@@ -66,3 +74,4 @@ console.log(employeePayrollData.toString());
 
 let newemployeePayrollData = new EmployeePayrollData(4, "Shubham", 55000, "M", new Date());
 console.log(newemployeePayrollData.toString());
+
